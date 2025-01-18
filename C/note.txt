@@ -1,0 +1,2 @@
+Linking GDI for compiling on windows
+as we need additional stuff run "gcc snow.c snow -lgdi32" to compile
