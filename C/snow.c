@@ -22,7 +22,7 @@ void setupNewSnow(){
 
 void animateSnow(){
     // SLEEP - this will change speed snow falls
-    Sleep(100);
+    Sleep(50);
     // You can also modify pixels here
     int pixelIndex = HEIGHT * WIDTH - 1;
     setupNewSnow();
@@ -32,7 +32,8 @@ void animateSnow(){
             if(GetRValue(pixels[pixelIndex]) == 255){
                 pixels[pixelIndex] = RGB(0, 0, 0);
                 if(pixelIndex + WIDTH < length){
-                    pixels[pixelIndex + WIDTH] = RGB(255, 255, 255);
+                    random = rand() % 3;
+                    pixels[pixelIndex + WIDTH - 1 + random] = RGB(255, 255, 255);
                 }
             }
             pixelIndex--;
