@@ -1,0 +1,16 @@
+.dub
+docs.json
+__dummy.html
+docs/
+/snow
+snow.so
+snow.dylib
+snow.dll
+snow.a
+snow.lib
+snow-test-*
+*.exe
+*.pdb
+*.o
+*.obj
+*.lst

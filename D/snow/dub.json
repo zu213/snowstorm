@@ -1,0 +1,13 @@
+{
+	"authors": [
+		"evilm"
+	],
+	"copyright": "Copyright © 2025, evilm",
+	"description": "A minimal D application.",
+	"license": "proprietary",
+	"name": "snow",
+	"libs": [
+		"user32",
+		"gdi32"
+	  ]
+}
