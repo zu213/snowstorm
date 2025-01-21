@@ -1,6 +1,7 @@
 // To run/compile rust we navigate to this folder and run 'cargo run'
 
 extern crate minifb;
+// Import a bunch of stuff to simplify
 use minifb::{Window, WindowOptions};
 use rand::Rng;
 use std::thread;

@@ -1,0 +1,1 @@
+! TBC, getting Fortran with GDI or OpenGL on Windows is a nightmare.
