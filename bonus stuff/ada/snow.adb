@@ -1,3 +1,6 @@
+
+-- This doesnt compile because linking the necessary windows libraries seems to be nigh on undocumented.
+
 with Ada.Text_IO;
 with Interfaces.C;
 with Interfaces.C.Strings;
