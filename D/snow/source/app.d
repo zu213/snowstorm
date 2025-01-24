@@ -1,3 +1,6 @@
+// dub build/ dub run in parent folder to run this 'snow' run this
+
+
 import core.sys.windows.windows;
 import std.stdio;
 
