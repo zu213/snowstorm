@@ -3,6 +3,8 @@
 
 import core.sys.windows.windows;
 import std.stdio;
+import core.thread;
+import core.time;
 
 // Window procedure function
 extern (Windows) LRESULT WndProc(HWND hwnd, uint msg, WPARAM wParam, LPARAM lParam) nothrow;
@@ -47,6 +49,11 @@ void main()
     {
         TranslateMessage(&msg);
         DispatchMessageW(&msg);
+
+		InvalidateRect(hwnd, null, true);  // Invalidate the entire window
+        UpdateWindow(hwnd); // Force WM_PAINT to be sent
+
+        Thread.sleep( dur!("msecs")( 50 ) );
     }
 }
 
@@ -55,23 +62,40 @@ extern (Windows) LRESULT WndProc(HWND hwnd, uint msg, WPARAM wParam, LPARAM lPar
 {
     switch (msg)
     {
-        case WM_PAINT:
-        {
-            // Start drawing
-            PAINTSTRUCT ps;
-            HDC hdc = BeginPaint(hwnd, &ps);
-            RECT rect;
-            rect.left = 100;
-            rect.top = 100;
-            rect.right = 400;
-            rect.bottom = 300;
 
-            // Set the brush color to red
-            HBRUSH hBrush = CreateSolidBrush(RGB(255, 0, 0));
-            FillRect(hdc, &rect, hBrush);
+		case WM_ERASEBKGND:
+        {
+            // background colour case
+            HDC hdc = cast(HDC)wParam;
+
+            COLORREF color = RGB(0,0,0); 
+            HBRUSH hBrush = CreateSolidBrush(color); // Create a brush with the desired color
+
+            RECT rect;
+            GetClientRect(hwnd, &rect); // Get the client area of the window
+            FillRect(hdc, &rect, hBrush); 
 
             // Clean up
             DeleteObject(hBrush);
+
+            return 1;
+        }
+
+        case WM_PAINT:
+        {
+                        // Start drawing
+            PAINTSTRUCT ps;
+            HDC hdc = BeginPaint(hwnd, &ps);
+
+            // Change a specific pixel (for example at coordinates (150, 150))
+            int x = 150;
+            int y = 150;
+            COLORREF color = RGB(255, 0, 0); // Red color
+
+            // Set the pixel at (150, 150) to red
+            SetPixel(hdc, x, y, color);
+
+            // Clean up
             EndPaint(hwnd, &ps);
             return 0;
         }
