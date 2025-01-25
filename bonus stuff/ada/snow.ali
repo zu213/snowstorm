@@ -1,0 +1,180 @@
+V "GNAT Lib v14"
+M P W=b
+P ZX
+
+RN
+RV NO_ACCESS_SUBPROGRAMS
+RV NO_ALLOCATORS
+RV NO_ANONYMOUS_ALLOCATORS
+RV NO_IO
+RV NO_IMPLICIT_CONDITIONALS
+RV NO_LOCAL_ALLOCATORS
+RV NO_STANDARD_ALLOCATORS_AFTER_ELABORATION
+RV NO_STANDARD_STORAGE_POOLS
+RV NO_DEFAULT_INITIALIZATION
+RV NO_DYNAMIC_SIZED_OBJECTS
+
+U snow%b		snow.adb		33eb8dac NE OO SU
+W ada%s			ada.ads			ada.ali
+Z ada.strings.text_buffers%s  a-sttebu.adb	a-sttebu.ali
+W ada.text_io%s		a-textio.adb		a-textio.ali
+W interfaces%s		interfac.ads		interfac.ali
+W interfaces.c%s	i-c.adb			i-c.ali
+W interfaces.c.strings%s  i-cstrin.adb		i-cstrin.ali
+Z system.concat_2%s	s-conca2.adb		s-conca2.ali
+Z system.img_int%s	s-imgint.ads		s-imgint.ali
+
+D ada.ads		20241103211802 76789da1 ada%s
+D a-except.ads		20241103211802 e7970cd9 ada.exceptions%s
+D a-ioexce.ads		20241103211802 40018c65 ada.io_exceptions%s
+D a-stream.ads		20241103211802 119b8fb3 ada.streams%s
+D a-string.ads		20241103211802 90ac6797 ada.strings%s
+D a-sttebu.ads		20241103211802 f1ad67a2 ada.strings.text_buffers%s
+D a-stuten.ads		20241103211802 c6ced0ae ada.strings.utf_encoding%s
+D a-tags.ads		20241103211802 9eaa38c6 ada.tags%s
+D a-textio.ads		20241103211802 34ef47de ada.text_io%s
+D a-unccon.ads		20241103211802 0e9b276f ada.unchecked_conversion%s
+D interfac.ads		20241103211802 9111f9c1 interfaces%s
+D i-c.ads		20241103211802 aac316ce interfaces.c%s
+D i-cstrin.ads		20241103211802 5409c1a4 interfaces.c.strings%s
+D i-cstrea.ads		20241103211802 ffd01b9d interfaces.c_streams%s
+D snow.adb		20250125193120 f9ce1d18 snow%b
+D system.ads		20241103211802 e4f8b086 system%s
+D s-conca2.ads		20241103211802 b5fb73f7 system.concat_2%s
+D s-crtl.ads		20241103211802 beb39b9e system.crtl%s
+D s-exctab.ads		20241103211802 91bef6ef system.exception_table%s
+D s-ficobl.ads		20241103211802 dc5161d4 system.file_control_block%s
+D s-imagei.ads		20241103211802 5e131ce0 system.image_i%s
+D s-imgint.ads		20241103211802 67e4edfb system.img_int%s
+D s-parame.ads		20241103211802 3597fc11 system.parameters%s
+D s-putima.ads		20241103211802 17291fe4 system.put_images%s
+D s-secsta.ads		20241103211802 578279f5 system.secondary_stack%s
+D s-soflin.ads		20241103211802 df77073e system.soft_links%s
+D s-stache.ads		20241103211802 0b81c1fe system.stack_checking%s
+D s-stalib.ads		20241103211802 1c9580f6 system.standard_library%s
+D s-stoele.ads		20241103211802 ccded4e8 system.storage_elements%s
+D s-traent.ads		20241103211802 c81cbf8c system.traceback_entries%s
+D s-unstyp.ads		20241103211802 fa2a7f59 system.unsigned_types%s
+D s-valspe.ads		20241103211802 b0fcd073 system.val_spec%s
+D s-vaispe.ads		20241103211802 8280550e system.value_i_spec%s
+D s-vauspe.ads		20241103211802 89269ba5 system.value_u_spec%s
+D s-vs_int.ads		20241103211802 06b6b724 system.vs_int%s
+D s-vs_uns.ads		20241103211802 e7f47a27 system.vs_uns%s
+D s-wchcon.ads		20241103211802 d9032363 system.wch_con%s
+G a e
+G c Z b b [snow standard 5 11 none]
+X 1 ada.ads
+16K9*Ada 20e8 15|1r6 98r13 147r7 163r4 175r13
+X 9 a-textio.ads
+58K13*Text_IO 785e16 15|1w10 98r17 147r11 163r8 175r17
+565U14*Put_Line 15|98s25 147s19 163s16 175s25
+X 11 interfac.ads
+38K9*Interfaces 233e15 15|2r6 3r6 9r17 10r17 11r17 12r17 13r17 14r17 19r24
+. 20r51 21r53 22r53 23r53 24r50 25r24 26r24 27r24 28r24 29r24 30r24 31r31
+. 32r31 36r46 37r53 38r53 39r46 40r52 41r70 42r37 45r33 45r63 48r33 51r52
+. 51r78 54r35 57r66 60r32 60r61 61r32 64r30 64r59 65r30 68r53 69r57 70r33
+. 79r43 82r38 83r37 84r37 85r37 89r32 90r32 91r32 92r32 93r29 109r11 116r51
+. 117r51 121r29 125r37 128r18 136r26 138r31 139r31 141r26 142r28 143r34 147r45
+X 12 i-c.ads
+30K20*C 598e17 15|2w17 3r17 9r28 10r28 11r28 12r28 13r28 14r28 19r35 20r62
+. 21r64 22r64 23r64 24r61 25r35 26r35 27r35 28r35 29r35 30r35 31r42 32r42
+. 36r57 37r64 38r64 39r57 40r63 41r81 42r48 45r44 45r74 48r44 51r63 51r89
+. 54r46 57r77 60r43 60r72 61r43 64r41 64r70 65r41 68r64 69r68 70r44 79r54
+. 82r49 83r48 84r48 85r48 89r43 90r43 91r43 92r43 93r40 109r22 116r62 117r62
+. 121r40 125r48 128r29 136r37 138r42 139r42 141r37 142r39 143r45 147r56
+61I9*long<integer> 15|9r30 10r30 11r30 12r30 13r30 14r30 19r37 20r64 21r66
+. 22r66 23r66 24r63 25r37 26r37 27r37 28r37 29r37 30r37 36r59 39r59 40r65
+. 41r83 42r50 45r46 45r76 48r46 51r91 54r48 57r79 60r45 60r74 61r45 64r43
+. 64r72 65r43 68r66 69r70 70r46 79r56 82r51 83r50 84r50 85r50 89r45 90r45
+. 91r45 92r45 93r42 109r24 136r39 138r44 139r44 141r39 142r41 143r47 147r58
+106E9*char<character> 15|31r44 32r44 37r66 38r66 51r65 116r64 117r64 121r42
+. 125r50 128r31
+X 13 i-cstrin.ads
+44K22*Strings 154e25 15|3w19
+X 15 snow.adb
+5U11*Snow 5b11 184l5 184t9
+8R9 MSG 15e14 68r41 73r47 76r47 171r25
+9i7 hwnd{12|61I9}
+10i7 message{12|61I9}
+11i7 wParam{12|61I9}
+12i7 lParam{12|61I9}
+13i7 time{12|61I9}
+14i7 pt{12|61I9}
+18R9 WNDCLASS 33e14 57r49 134r27
+19i7 style{12|61I9} 136m17
+20p7 lpfnWndProc(12|61I9) 137m17
+20i41 hwnd{12|61I9}
+21i43 msg{12|61I9}
+22i43 wParam{12|61I9}
+23i43 lParam{12|61I9}
+25i7 cbClsExtra{12|61I9} 138m17
+26i7 cbWndExtra{12|61I9} 139m17
+27i7 hInstance{12|61I9} 140m17
+28i7 hIcon{12|61I9} 141m17
+29i7 hCursor{12|61I9} 142m17
+30i7 hbrBackground{12|61I9} 143m17
+31p7 lpszMenuName(12|106E9) 144m17
+32p7 lpszClassName(12|106E9) 145m17
+36V13*CreateWindowExA{12|61I9} 36>30 37^30 38^30 39>30 40>30 40>33 40>36
+. 40>43 41>30 41>42 41>49 41>60 43b<c,CreateWindowExA>25 152s12
+36i30 ExStyle{12|61I9}
+37p30 ClassName(12|106E9)
+38p30 WindowName(12|106E9)
+39i30 Style{12|61I9}
+40i30 X{12|61I9}
+40i33 Y{12|61I9}
+40i36 Width{12|61I9}
+40i43 Height{12|61I9}
+41i30 hWndParent{12|61I9}
+41i42 hMenu{12|61I9}
+41i49 hInstance{12|61I9}
+41i60 lpParam{12|61I9}
+45U14*ShowWindow 45>26 45>52 46b<c,ShowWindow>25 159s4
+45i26 hwnd{12|61I9}
+45i52 nCmdShow{12|61I9}
+48V13*GetLastError{12|61I9} 49b<c,GetLastError>25
+51V13*GetModuleHandleA{12|61I9} 51^30 52b<c,GetModuleHandleA>25 140s30
+51p30 lpModuleName(12|106E9)
+54U14*UpdateWindow 54>28 55b<c,UpdateWindow>25 160s4
+54i28 hwnd{12|61I9}
+57V13*RegisterClassA{12|61I9} 57^29 58b<c,RegisterClassA>25 147s69
+57p29 lpWndClass(18R9)
+60V13*BeginPaint{12|61I9} 60>25 60>51 62b<c,BeginPaint>25
+60i25 hwnd{12|61I9}
+60i51 lpPaint{12|61I9}
+64V13*EndPaint{12|61I9} 64>23 64>49 66b<c,EndPaint>25
+64i23 hwnd{12|61I9}
+64i49 lpPaint{12|61I9}
+68V13*GetMessageA{12|61I9} 68^26 68>46 69>26 69>41 71b<c,GetMessageA>25 174s21
+68p26 lpMsg(8R9)
+68i46 hwnd{12|61I9}
+69i26 wMsgFilterMin{12|61I9}
+69i41 wMsgFilterMax{12|61I9}
+73U14*TranslateMessage 73^32 74b<c,TranslateMessage>25 180s10
+73p32 lpMsg(8R9)
+76U14*DispatchMessageA 76^32 77b<c,DispatchMessageA>25 181s10
+76p32 lpMsg(8R9)
+79U14*PostQuitMessage 79>31 80b<c,PostQuitMessage>25 101s13
+79i31 nExitCode{12|61I9}
+82U14*PostMessageA 82>28 83>27 84>27 85>27 86b<c,PostMessageA>25 166s4
+82i28 hwnd{12|61I9}
+83i27 msg{12|61I9}
+84i27 wParam{12|61I9}
+85i27 lParam{12|61I9}
+89V13 WndProc{12|61I9} 89b13 89>22 90>22 91>22 92>22 106l8 106t15 137r32
+89i22 hwnd{12|61I9}
+90i22 msg{12|61I9} 95r12
+91i22 wParam{12|61I9}
+92i22 lParam{12|61I9}
+109i4 HWnd{12|61I9} 152m4 159r15 160r17 166r17 174r46
+111a4 ClassName{string} 145r46 153r41
+112a4 WindowName{string} 154r41
+113e4 terminator{character}
+116V13 To_C_String(12|106E9) 116b13 116>25 129l8 129t19 145s34 153s29 154s29
+116a25 S{string} 117r34 120r21 121r47 125r20
+117a7 C_Char_Array(12|106E9) 121m10 125m7 128r37
+120i11 I{integer} 121r23 121r49
+134r7 WndClassa{18R9} 136m7 137m7 138m7 139m7 140m7 141m7 142m7 143m7 144m7
+. 145m7 147m84 147r84
+171r10 msga{8R9} 174m33 174r33 180m27 180r27 181m27 181r27
+
