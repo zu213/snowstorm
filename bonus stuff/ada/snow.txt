@@ -1,7 +1,7 @@
 with Ada.Text_IO;
 with Interfaces.C;
 with Interfaces.C.Strings;
-
+-- Chnage file ending to .adb to make into ada source code file
 -- C:\msys64\mingw64\bin\gnatmake.exe snow.adb -LC:/msys64/mingw64/lib
 
 procedure Snow is
