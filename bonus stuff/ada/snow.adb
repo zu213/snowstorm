@@ -9,17 +9,9 @@ procedure Snow is
    type C_String_Array is array (1 .. 7) of Interfaces.C.Char;
 
    -- Declare a variable with the defined type and manually add null terminator
-   Null_Terminated_String : aliased C_String_Array := 
-     (Interfaces.C.Char'('S'),
-      Interfaces.C.Char'('i'),
-      Interfaces.C.Char'('m'),
-      Interfaces.C.Char'('p'),
-      Interfaces.C.Char'('l'),
-      Interfaces.C.Char'('e'),
-      Interfaces.C.Char'('0')); 
+
 
    C_String_Ptr : access C_String_Array;
-
    -- Declare the MSG (message) structure for the message loop
    type MSG is record
       hwnd    : Interfaces.C.long;
@@ -44,8 +36,8 @@ procedure Snow is
       hIcon          : Interfaces.C.long;
       hCursor        : Interfaces.C.long;
       hbrBackground  : Interfaces.C.long;
-      lpszMenuName   : access Interfaces.C.Char;
-      lpszClassName  : C_String_Array;
+      lpszMenuName   : access C_String_Array;
+      lpszClassName  : access C_String_Array;
    end record;
 
    -- Declare external Windows functions using pragma Import
@@ -70,7 +62,7 @@ procedure Snow is
    procedure UpdateWindow (hwnd : Interfaces.C.long);
       pragma Import (C, UpdateWindow, "UpdateWindow");
 
-   function RegisterClassA (lpWndClass : WNDCLASS) return Interfaces.C.long;
+   function RegisterClassA (lpWndClass : access WNDCLASS) return Interfaces.C.long;
       pragma Import (C, RegisterClassA, "RegisterClassA");
 
    function BeginPaint (hwnd : Interfaces.C.long; lpPaint : Interfaces.C.long) 
@@ -127,6 +119,14 @@ procedure Snow is
    ClassName : constant String := "SimpleWindowClass";
    WindowName : constant String := "Ada GDI Window";
    terminator : constant Character := '0';
+   Null_Terminated_String : aliased C_String_Array := 
+     (Interfaces.C.Char'('S'),
+      Interfaces.C.Char'('i'),
+      Interfaces.C.Char'('m'),
+      Interfaces.C.Char'('p'),
+      Interfaces.C.Char'('l'),
+      Interfaces.C.Char'('e'),
+      Interfaces.C.Char'('0'));
 
    -- Convert Ada string to C-style string (pointer to C.char)
    function To_C_String(S : String) return access Interfaces.C.Char is
@@ -146,13 +146,12 @@ procedure Snow is
 
 begin
    -- Register the window class
-   C_String_Ptr := Null_Terminated_String'Access;
    declare
       WndClassa : aliased WNDCLASS;
       Result : Interfaces.C.long;
+      test: access C_String_Array := Null_Terminated_String'Access;
       
    begin
-      Ada.Text_IO.Put_Line("RegisterClassA failed!");
       WndClassa.style := Interfaces.C.long'(0);
       WndClassa.lpfnWndProc := WndProc'Access;
       WndClassa.cbClsExtra := Interfaces.C.long'(0);
@@ -161,10 +160,10 @@ begin
       WndClassa.hIcon := Interfaces.C.long'(0);
       WndClassa.hCursor := Interfaces.C.long'(0);
       WndClassa.hbrBackground := Interfaces.C.long'(0);
-      WndClassa.lpszMenuName := null;
-      WndClassa.lpszClassName := Null_Terminated_String;
+      WndClassa.lpszMenuName := test;
+      WndClassa.lpszClassName := test;
 
-      Result := RegisterClassA(WndClassa);
+      Result := RegisterClassA(WndClassa'Access);
 
       Ada.Text_IO.Put_Line("HWnd value: " & Interfaces.C.Long'Image(Result));
 

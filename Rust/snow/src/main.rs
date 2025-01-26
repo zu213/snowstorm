@@ -32,7 +32,7 @@ fn main() {
         for y in (0..HEIGHT).rev() {
             for x in 0..WIDTH {
                 if buffer[y * WIDTH + x] == 0xFFFFFF {
-                    if (y + 1) * WIDTH + x < LENGTH {
+                    if (y + 1) * WIDTH + x + 3 < LENGTH {
                         random_int = rng.gen_range(0..3);                  
                         buffer[y * WIDTH + x + 319 + random_int] = 0xFFFFFF;
                     }

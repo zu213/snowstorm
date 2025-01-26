@@ -1,5 +1,0 @@
-Unlike Assembly, there are so many ways to do this in C.
-In this one since we are on Windows and I wanted to keep it relatively low level I use GDI (Graphics Device Interface).
-
-Linking GDI for compiling on windows
-as we need GDI run "gcc snow.c snow -lgdi32" to compile

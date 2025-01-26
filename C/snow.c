@@ -39,9 +39,6 @@ void animateSnow(){
             pixelIndex--;
         }
     }
-    //printf("%i", GetRValue(pixels[pixelIndex]));
-    //printf("%i", GetGValue(pixels[pixelIndex]));
-    //printf("%i", GetBValue(pixels[pixelIndex]));
 }
 
 

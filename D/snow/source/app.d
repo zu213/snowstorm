@@ -108,6 +108,7 @@ extern (Windows) LRESULT WndProc(HWND hwnd, uint msg, WPARAM wParam, LPARAM lPar
             int white = RGB(255, 255, 255);
             int black = RGB(0, 0, 0);
             int* pixelData = cast(int*)pBits;
+            int localRandomNumber;
 
             // Loop through buffer and move snow
             for (int i = height -1; i > 0; i--) {
@@ -116,7 +117,8 @@ extern (Windows) LRESULT WndProc(HWND hwnd, uint msg, WPARAM wParam, LPARAM lPar
                     if (pixelData[index] == white) {
                         pixelData[index] = black;
                         if (i < height - 1) {
-                            pixelData[(i + 1) * width + j] = white;
+                            localRandomNumber = uniform(1,4);
+                            pixelData[(i + 1) * width + j - 2 + localRandomNumber] = white;
                         }
                     }
                 }
