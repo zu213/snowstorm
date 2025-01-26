@@ -2,7 +2,23 @@ with Ada.Text_IO;
 with Interfaces.C;
 with Interfaces.C.Strings;
 
+-- C:\msys64\mingw64\bin\gnatmake.exe snow.adb -LC:/msys64/mingw64/lib
+
 procedure Snow is
+
+   type C_String_Array is array (1 .. 7) of Interfaces.C.Char;
+
+   -- Declare a variable with the defined type and manually add null terminator
+   Null_Terminated_String : aliased C_String_Array := 
+     (Interfaces.C.Char'('S'),
+      Interfaces.C.Char'('i'),
+      Interfaces.C.Char'('m'),
+      Interfaces.C.Char'('p'),
+      Interfaces.C.Char'('l'),
+      Interfaces.C.Char'('e'),
+      Interfaces.C.Char'('0')); 
+
+   C_String_Ptr : access C_String_Array;
 
    -- Declare the MSG (message) structure for the message loop
    type MSG is record
@@ -29,7 +45,7 @@ procedure Snow is
       hCursor        : Interfaces.C.long;
       hbrBackground  : Interfaces.C.long;
       lpszMenuName   : access Interfaces.C.Char;
-      lpszClassName  : access Interfaces.C.Char;
+      lpszClassName  : C_String_Array;
    end record;
 
    -- Declare external Windows functions using pragma Import
@@ -54,7 +70,7 @@ procedure Snow is
    procedure UpdateWindow (hwnd : Interfaces.C.long);
       pragma Import (C, UpdateWindow, "UpdateWindow");
 
-   function RegisterClassA (lpWndClass : access WNDCLASS) return Interfaces.C.long;
+   function RegisterClassA (lpWndClass : WNDCLASS) return Interfaces.C.long;
       pragma Import (C, RegisterClassA, "RegisterClassA");
 
    function BeginPaint (hwnd : Interfaces.C.long; lpPaint : Interfaces.C.long) 
@@ -122,7 +138,7 @@ procedure Snow is
       end loop;
 
       -- Null-terminate the C string (adding the null byte)
-      C_Char_Array(S'Length + 1) := Interfaces.C.Char'('0'); -- Space character as terminator
+      C_Char_Array(S'Length + 1) := Interfaces.C.Char(Character'Val(0)); -- Space character as terminator
 
       -- Return access to the dynamically allocated array
       return new Interfaces.C.Char'(C_Char_Array(1));  -- Dynamically allocate and return the pointer
@@ -130,9 +146,13 @@ procedure Snow is
 
 begin
    -- Register the window class
+   C_String_Ptr := Null_Terminated_String'Access;
    declare
       WndClassa : aliased WNDCLASS;
+      Result : Interfaces.C.long;
+      
    begin
+      Ada.Text_IO.Put_Line("RegisterClassA failed!");
       WndClassa.style := Interfaces.C.long'(0);
       WndClassa.lpfnWndProc := WndProc'Access;
       WndClassa.cbClsExtra := Interfaces.C.long'(0);
@@ -142,10 +162,35 @@ begin
       WndClassa.hCursor := Interfaces.C.long'(0);
       WndClassa.hbrBackground := Interfaces.C.long'(0);
       WndClassa.lpszMenuName := null;
-      WndClassa.lpszClassName := To_C_String(ClassName);
+      WndClassa.lpszClassName := Null_Terminated_String;
 
-      Ada.Text_IO.Put_Line("HWnd value: " & Interfaces.C.Long'Image(RegisterClassA(WndClassa'Access)));
+      Result := RegisterClassA(WndClassa);
 
+      Ada.Text_IO.Put_Line("HWnd value: " & Interfaces.C.Long'Image(Result));
+
+      Ada.Text_IO.Put_Line("RegisterClassA failed!");
+      Ada.Text_IO.Put_Line("Error code: " & Interfaces.C.Long'Image(GetLastError));
+      Ada.Text_IO.Put_Line("RegisterClassA succeeded.");
+
+   end;
+
+   declare
+      Null_Terminated_String : array (1 .. 7) of Interfaces.C.Char := 
+     (Interfaces.C.Char'('S'),
+      Interfaces.C.Char'('i'),
+      Interfaces.C.Char'('m'),
+      Interfaces.C.Char'('p'),
+      Interfaces.C.Char'('l'),
+      Interfaces.C.Char'('e'),
+      Interfaces.C.Char'('0')); 
+      Test_String : access Interfaces.C.char := To_C_String("Test");
+   begin
+      -- Loop through the string and print each character
+      Ada.Text_IO.Put_Line("Converted string (with null termination):");
+      for I in Null_Terminated_String'Range loop
+         Ada.Text_IO.Put(Interfaces.C.Char'Image(Null_Terminated_String(I)));
+      end loop;
+      Ada.Text_IO.New_Line;
    end;
 
    -- Create the window using Windows API
@@ -171,6 +216,7 @@ begin
          msga : aliased MSG;
       begin
          -- Get a message from the message queue
+         Ada.Text_IO.Put_Line("Bye, dsasasaorld!");
          if Integer(GetMessageA(msga'Access, HWnd, 0, 0)) = 0 then
             Ada.Text_IO.Put_Line("Bye, World!");
             exit;
