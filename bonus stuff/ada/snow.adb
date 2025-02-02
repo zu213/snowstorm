@@ -1,229 +1,187 @@
 with Ada.Text_IO;
 with Interfaces.C;
 with Interfaces.C.Strings;
--- Chnage file ending to .adb to make into ada source code file
--- C:\msys64\mingw64\bin\gnatmake.exe snow.adb -LC:/msys64/mingw64/lib
+with System;
 
 procedure Snow is
+   use Interfaces.C;
 
-   type C_String_Array is array (1 .. 7) of Interfaces.C.Char;
+   -- Ensure Windows API expects stdcall convention
+   function WndProc (hwnd    : long;
+                     msg     : long;
+                     wParam  : long;
+                     lParam  : long) return long;
+   pragma Convention (Stdcall, WndProc);  -- FIXED: Use Stdcall instead of C
 
-   -- Declare a variable with the defined type and manually add null terminator
-
-
-   C_String_Ptr : access C_String_Array;
-   -- Declare the MSG (message) structure for the message loop
+   -- Define Windows API types
    type MSG is record
-      hwnd    : Interfaces.C.long;
-      message : Interfaces.C.long;
-      wParam  : Interfaces.C.long;
-      lParam  : Interfaces.C.long;
-      time    : Interfaces.C.long;
-      pt      : Interfaces.C.long;
+      hwnd    : long;
+      message : long;
+      wParam  : long;
+      lParam  : long;
+      time    : long;
+      pt      : long;
    end record;
 
-   -- Declare the WNDCLASS type
    type WNDCLASS is record
-      style          : Interfaces.C.long;
-      lpfnWndProc    : access function (hwnd    : Interfaces.C.long;
-                                          msg     : Interfaces.C.long;
-                                          wParam  : Interfaces.C.long;
-                                          lParam  : Interfaces.C.long) 
-                                          return Interfaces.C.long;
-      cbClsExtra     : Interfaces.C.long;
-      cbWndExtra     : Interfaces.C.long;
-      hInstance      : Interfaces.C.long;
-      hIcon          : Interfaces.C.long;
-      hCursor        : Interfaces.C.long;
-      hbrBackground  : Interfaces.C.long;
-      lpszMenuName   : access C_String_Array;
-      lpszClassName  : access C_String_Array;
+      style          : long;
+      lpfnWndProc    : access function (hwnd    : long;
+                                        msg     : long;
+                                        wParam  : long;
+                                        lParam  : long) return long
+                        with Convention => Stdcall;
+      cbClsExtra     : long;
+      cbWndExtra     : long;
+      hInstance      : long;
+      hIcon          : System.Address;
+      hCursor        : System.Address;
+      hbrBackground  : System.Address;
+      lpszMenuName   : access Interfaces.C.Strings.chars_ptr;
+      lpszClassName  : Interfaces.C.Strings.chars_ptr;
    end record;
 
-   -- Declare external Windows functions using pragma Import
-   function CreateWindowExA (ExStyle       : Interfaces.C.long;
-                             ClassName     : access Interfaces.C.Char;
-                             WindowName    : access Interfaces.C.Char;
-                             Style         : Interfaces.C.long;
-                             X, Y, Width, Height : Interfaces.C.long;
-                             hWndParent, hMenu, hInstance, lpParam : Interfaces.C.long) 
-                             return Interfaces.C.long;
-      pragma Import (C, CreateWindowExA, "CreateWindowExA");
+   -- Declare Windows API functions
+   function RegisterClassA (lpWndClass : access WNDCLASS) return long;
+   pragma Import (Stdcall, RegisterClassA, "RegisterClassA");
 
-   procedure ShowWindow (hwnd : Interfaces.C.long; nCmdShow : Interfaces.C.long);
-      pragma Import (C, ShowWindow, "ShowWindow");
+   function CreateWindowExA (ExStyle       : long;
+                             ClassName     : Interfaces.C.Strings.chars_ptr;
+                             WindowName    : Interfaces.C.Strings.chars_ptr;
+                             Style         : long;
+                             X, Y, Width, Height : long;
+                             hWndParent, hMenu    : access long;
+                             hInstance : long;
+                             lpParam: System.Address) 
+                             return long;
+   pragma Import (Stdcall, CreateWindowExA, "CreateWindowExA");
 
-   function GetLastError return Interfaces.C.long;
-      pragma Import (C, GetLastError, "GetLastError");
+   function GetLastError return long;
+   pragma Import (Stdcall, GetLastError, "GetLastError");
 
-   function GetModuleHandleA(lpModuleName : access Interfaces.C.Char) return Interfaces.C.long;
-      pragma Import (C, GetModuleHandleA, "GetModuleHandleA");
+   function GetModuleHandleA(lpModuleName : access Interfaces.C.Char) return long;
+   pragma Import (Stdcall, GetModuleHandleA, "GetModuleHandleA");
 
-   procedure UpdateWindow (hwnd : Interfaces.C.long);
-      pragma Import (C, UpdateWindow, "UpdateWindow");
+   procedure ShowWindow (hwnd : long; nCmdShow : long);
+   pragma Import (Stdcall, ShowWindow, "ShowWindow");
 
-   function RegisterClassA (lpWndClass : access WNDCLASS) return Interfaces.C.long;
-      pragma Import (C, RegisterClassA, "RegisterClassA");
+   procedure UpdateWindow (hwnd : long);
+   pragma Import (Stdcall, UpdateWindow, "UpdateWindow");
 
-   function BeginPaint (hwnd : Interfaces.C.long; lpPaint : Interfaces.C.long) 
-                        return Interfaces.C.long;
-      pragma Import (C, BeginPaint, "BeginPaint");
-
-   function EndPaint (hwnd : Interfaces.C.long; lpPaint : Interfaces.C.long) 
-                      return Interfaces.C.long;
-      pragma Import (C, EndPaint, "EndPaint");
-
-   function GetMessageA (lpMsg : access MSG; hwnd : Interfaces.C.long; 
-                         wMsgFilterMin, wMsgFilterMax : Interfaces.C.long) 
-                         return Interfaces.C.long;
-      pragma Import (C, GetMessageA, "GetMessageA");
+   function GetMessageA (lpMsg : access MSG; hwnd : long; wMsgFilterMin, wMsgFilterMax : long) 
+                         return long;
+   pragma Import (Stdcall, GetMessageA, "GetMessageA");
 
    procedure TranslateMessage (lpMsg : access MSG);
-      pragma Import (C, TranslateMessage, "TranslateMessage");
+   pragma Import (Stdcall, TranslateMessage, "TranslateMessage");
 
    procedure DispatchMessageA (lpMsg : access MSG);
-      pragma Import (C, DispatchMessageA, "DispatchMessageA");
+   pragma Import (Stdcall, DispatchMessageA, "DispatchMessageA");
 
-   procedure PostQuitMessage (nExitCode : Interfaces.C.long);
-      pragma Import (C, PostQuitMessage, "PostQuitMessage");
+   procedure PostQuitMessage (nExitCode : long);
+   pragma Import (Stdcall, PostQuitMessage, "PostQuitMessage");
 
-   procedure PostMessageA (hwnd    : Interfaces.C.long;
-                          msg     : Interfaces.C.long;
-                          wParam  : Interfaces.C.long;
-                          lParam  : Interfaces.C.long);
-      pragma Import (C, PostMessageA, "PostMessageA");
-
-   -- Window procedure to handle messages (e.g., close event)
-   function WndProc (hwnd    : Interfaces.C.long;
-                     msg     : Interfaces.C.long;
-                     wParam  : Interfaces.C.long;
-                     lParam  : Interfaces.C.long) 
-                     return Interfaces.C.long is
+   -- Ensure WndProc has correct convention
+   function WndProc (hwnd    : long;
+                     msg     : long;
+                     wParam  : long;
+                     lParam  : long) return long is
    begin
       case msg is
          when 15 => -- WM_PAINT message
-            -- Handle paint here (you could add custom drawing)
             Ada.Text_IO.Put_Line("Painting the window...");
             return 0;
          when 2 => -- WM_CLOSE message
             PostQuitMessage(0);
+            return 0;
          when others =>
             return 0;
       end case;
-      return 0;
    end WndProc;
 
-   -- Window handle and other constants
-   HWnd : Interfaces.C.long;
+   -- Window Handle
+   HWnd : long;
 
-   ClassName : constant String := "SimpleWindowClass";
-   WindowName : constant String := "Ada GDI Window";
-   terminator : constant Character := '0';
-   Null_Terminated_String : aliased C_String_Array := 
-     (Interfaces.C.Char'('S'),
-      Interfaces.C.Char'('i'),
-      Interfaces.C.Char'('m'),
-      Interfaces.C.Char'('p'),
-      Interfaces.C.Char'('l'),
-      Interfaces.C.Char'('e'),
-      Interfaces.C.Char'('0'));
+   -- Window Class and Window Name
+   ClassName  : constant String := "SimpleWindowClass";
+   WindowName : constant String := "AdaGDIWindow";
 
-   -- Convert Ada string to C-style string (pointer to C.char)
-   function To_C_String(S : String) return access Interfaces.C.Char is
-      C_Char_Array : array (1 .. S'Length + 1) of Interfaces.C.Char;
+   -- Convert Ada string to C-style string
+   function To_C_String(S : String) return Interfaces.C.Strings.chars_ptr is
    begin
-      -- Populate C_Char_Array with characters from S
-      for I in 1 .. S'Length loop
-         C_Char_Array(I) := Interfaces.C.Char(S(I));
-      end loop;
-
-      -- Null-terminate the C string (adding the null byte)
-      C_Char_Array(S'Length + 1) := Interfaces.C.Char(Character'Val(0)); -- Space character as terminator
-
-      -- Return access to the dynamically allocated array
-      return new Interfaces.C.Char'(C_Char_Array(1));  -- Dynamically allocate and return the pointer
+      return Interfaces.C.Strings.New_String(S);
    end To_C_String;
 
 begin
    -- Register the window class
    declare
       WndClassa : aliased WNDCLASS;
-      Result : Interfaces.C.long;
-      test: access C_String_Array := Null_Terminated_String'Access;
-      
+      Result    : long;
+      ClassName_C  : Interfaces.C.Strings.chars_ptr := To_C_String(ClassName);
+      WindowName_C : Interfaces.C.Strings.chars_ptr := To_C_String(WindowName);
    begin
-      WndClassa.style := Interfaces.C.long'(0);
-      WndClassa.lpfnWndProc := WndProc'Access;
-      WndClassa.cbClsExtra := Interfaces.C.long'(0);
-      WndClassa.cbWndExtra := Interfaces.C.long'(0);
-      WndClassa.hInstance := GetModuleHandleA(null);
-      WndClassa.hIcon := Interfaces.C.long'(0);
-      WndClassa.hCursor := Interfaces.C.long'(0);
-      WndClassa.hbrBackground := Interfaces.C.long'(0);
-      WndClassa.lpszMenuName := test;
-      WndClassa.lpszClassName := test;
+      WndClassa.lpszClassName := ClassName_C;
+      WndClassa.lpszMenuName  := null;  -- No menu
+      WndClassa.style         := 0;
+      WndClassa.lpfnWndProc   := WndProc'Access;  -- FIXED: WndProc has correct convention
+      WndClassa.cbClsExtra    := 0;
+      WndClassa.cbWndExtra    := 0;
+      WndClassa.hInstance     := GetModuleHandleA(null);
+      WndClassa.hIcon         := System.Null_Address;
+      WndClassa.hCursor       := System.Null_Address;
+      WndClassa.hbrBackground := System.Null_Address;
 
+      --Result := GetModuleHandleA(null);
+      Ada.Text_IO.Put_Line("hInstance before window creation: " & long'Image(WndClassa.hInstance));
+
+      Ada.Text_IO.Put_Line("Class Name: " & Interfaces.C.Strings.Value(ClassName_C));
+      -- Register the class
       Result := RegisterClassA(WndClassa'Access);
+      Ada.Text_IO.Put_Line("RegisterClassA result: " & long'Image(Result));
+      if Result = 0 then
+         Ada.Text_IO.Put_Line("RegisterClassA failed!");
+         Ada.Text_IO.Put_Line("Error code: " & long'Image(GetLastError));
+         return;
+      else
+         Ada.Text_IO.Put_Line("RegisterClassA succeeded.");
+      end if;
+      Ada.Text_IO.Put_Line("Window Name: " & Interfaces.C.Strings.Value(WindowName_C));
+      Ada.Text_IO.Put_Line("Class Name: " & Interfaces.C.Strings.Value(ClassName_C));
+      Ada.Text_IO.Put_Line("hInstance before window creation: " & long'Image(WndClassa.hInstance));
 
-      Ada.Text_IO.Put_Line("HWnd value: " & Interfaces.C.Long'Image(Result));
+      -- Create the window
+      HWnd := CreateWindowExA (0,
+                               ClassName_C,  -- Must match the registered class name
+                               WindowName_C,
+                               0,   -- WS_OVERLAPPEDWINDOW
+                               200, 0, 200, 0,
+                               null, null, WndClassa.hInstance, System.Null_Address);
 
-      Ada.Text_IO.Put_Line("RegisterClassA failed!");
-      Ada.Text_IO.Put_Line("Error code: " & Interfaces.C.Long'Image(GetLastError));
-      Ada.Text_IO.Put_Line("RegisterClassA succeeded.");
+      if HWnd = 0 then
+         declare
+            ErrCode : long := GetLastError;
+         begin
+            Ada.Text_IO.Put_Line("CreateWindowExA failed!");
+            Ada.Text_IO.Put_Line("Error code: " & long'Image(ErrCode));
+         end;
+         return;
+      end if;
 
-   end;
+      -- Show and update the window
+      ShowWindow(HWnd, 1);
+      UpdateWindow(HWnd);
 
-   declare
-      Null_Terminated_String : array (1 .. 7) of Interfaces.C.Char := 
-     (Interfaces.C.Char'('S'),
-      Interfaces.C.Char'('i'),
-      Interfaces.C.Char'('m'),
-      Interfaces.C.Char'('p'),
-      Interfaces.C.Char'('l'),
-      Interfaces.C.Char'('e'),
-      Interfaces.C.Char'('0')); 
-      Test_String : access Interfaces.C.char := To_C_String("Test");
-   begin
-      -- Loop through the string and print each character
-      Ada.Text_IO.Put_Line("Converted string (with null termination):");
-      for I in Null_Terminated_String'Range loop
-         Ada.Text_IO.Put(Interfaces.C.Char'Image(Null_Terminated_String(I)));
+      -- Message loop
+      loop
+         declare
+            msga : aliased MSG;
+         begin
+            if Integer(GetMessageA(msga'Access, HWnd, 0, 0)) = 0 then
+               Ada.Text_IO.Put_Line("Exiting message loop.");
+               exit;
+            end if;
+            TranslateMessage(msga'Access);
+            DispatchMessageA(msga'Access);
+         end;
       end loop;
-      Ada.Text_IO.New_Line;
    end;
-
-   -- Create the window using Windows API
-   HWnd := CreateWindowExA (0,
-                            To_C_String(ClassName),  -- Pass the access type here
-                            To_C_String(WindowName),  -- Pass the access type here
-                            110, 20, 220, 500, 500,540, 0, 0, 0);
-
-   -- Check if the window was created successfully
-   -- Show the window
-   ShowWindow(HWnd, 1);  -- 1 means SW_SHOWNORMAL (show the window)
-   UpdateWindow(HWnd);
-
-   -- Print "Hello, World!" to the console
-   Ada.Text_IO.Put_Line("Hello, World!");
-
-   -- Manually trigger the WM_PAINT message (request a paint)
-   PostMessageA(HWnd, 15, 0, 0);  -- 15 corresponds to WM_PAINT
-
-   -- Enter the message loop
-   loop
-      declare
-         msga : aliased MSG;
-      begin
-         -- Get a message from the message queue
-         Ada.Text_IO.Put_Line("Bye, dsasasaorld!");
-         if Integer(GetMessageA(msga'Access, HWnd, 0, 0)) = 0 then
-            Ada.Text_IO.Put_Line("Bye, World!");
-            exit;
-         end if;
-
-         -- Translate and dispatch the message
-         TranslateMessage(msga'Access);
-         DispatchMessageA(msga'Access);
-      end;
-   end loop;
 end Snow;
