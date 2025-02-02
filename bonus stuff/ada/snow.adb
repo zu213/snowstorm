@@ -6,12 +6,12 @@ with System;
 procedure Snow is
    use Interfaces.C;
 
-   -- Ensure Windows API expects stdcall convention
+   -- Ensure Windows API expects C convention
    function WndProc (hwnd    : long;
                      msg     : long;
                      wParam  : long;
                      lParam  : long) return long;
-   pragma Convention (Stdcall, WndProc);  -- FIXED: Use Stdcall instead of C
+   pragma Convention (C, WndProc);  -- FIXED: Use C instead of C
 
    -- Define Windows API types
    type MSG is record
@@ -29,10 +29,10 @@ procedure Snow is
                                         msg     : long;
                                         wParam  : long;
                                         lParam  : long) return long
-                        with Convention => Stdcall;
+                        with Convention => C;
       cbClsExtra     : long;
       cbWndExtra     : long;
-      hInstance      : long;
+      hInstance      : Interfaces.C.unsigned_long;
       hIcon          : System.Address;
       hCursor        : System.Address;
       hbrBackground  : System.Address;
@@ -44,13 +44,13 @@ procedure Snow is
    function RegisterClassA (lpWndClass : access WNDCLASS) return long;
    pragma Import (Stdcall, RegisterClassA, "RegisterClassA");
 
-   function CreateWindowExA (ExStyle       : long;
+   function CreateWindowExA (ExStyle       : Interfaces.C.unsigned_long;
                              ClassName     : Interfaces.C.Strings.chars_ptr;
                              WindowName    : Interfaces.C.Strings.chars_ptr;
-                             Style         : long;
-                             X, Y, Width, Height : long;
-                             hWndParent, hMenu    : access long;
-                             hInstance : long;
+                             Style         : Interfaces.C.unsigned_long;
+                             X, Y, Width, Height : int;
+                             hWndParent, hMenu    : System.Address;
+                             hInstance : Interfaces.C.unsigned_long;
                              lpParam: System.Address) 
                              return long;
    pragma Import (Stdcall, CreateWindowExA, "CreateWindowExA");
@@ -58,7 +58,7 @@ procedure Snow is
    function GetLastError return long;
    pragma Import (Stdcall, GetLastError, "GetLastError");
 
-   function GetModuleHandleA(lpModuleName : access Interfaces.C.Char) return long;
+   function GetModuleHandleA(lpModuleName : access Interfaces.C.Char) return  Interfaces.C.unsigned_long;
    pragma Import (Stdcall, GetModuleHandleA, "GetModuleHandleA");
 
    procedure ShowWindow (hwnd : long; nCmdShow : long);
@@ -128,10 +128,10 @@ begin
       WndClassa.hInstance     := GetModuleHandleA(null);
       WndClassa.hIcon         := System.Null_Address;
       WndClassa.hCursor       := System.Null_Address;
-      WndClassa.hbrBackground := System.Null_Address;
+      WndClassa.hbrBackground := System.Null_Address; 
 
       --Result := GetModuleHandleA(null);
-      Ada.Text_IO.Put_Line("hInstance before window creation: " & long'Image(WndClassa.hInstance));
+      Ada.Text_IO.Put_Line("hInstance before window creation: " & Interfaces.C.unsigned_long'Image(WndClassa.hInstance));
 
       Ada.Text_IO.Put_Line("Class Name: " & Interfaces.C.Strings.Value(ClassName_C));
       -- Register the class
@@ -146,15 +146,15 @@ begin
       end if;
       Ada.Text_IO.Put_Line("Window Name: " & Interfaces.C.Strings.Value(WindowName_C));
       Ada.Text_IO.Put_Line("Class Name: " & Interfaces.C.Strings.Value(ClassName_C));
-      Ada.Text_IO.Put_Line("hInstance before window creation: " & long'Image(WndClassa.hInstance));
+      Ada.Text_IO.Put_Line("hInstance before window creation: " & Interfaces.C.unsigned_long'Image(WndClassa.hInstance));
 
       -- Create the window
       HWnd := CreateWindowExA (0,
                                ClassName_C,  -- Must match the registered class name
                                WindowName_C,
-                               0,   -- WS_OVERLAPPEDWINDOW
-                               200, 0, 200, 0,
-                               null, null, WndClassa.hInstance, System.Null_Address);
+                               16#cf0000#, -- WS_OVERLAPPEDWINDOW
+                               0,0,320,240,
+                               System.Null_Address, System.Null_Address, WndClassa.hInstance, System.Null_Address);
 
       if HWnd = 0 then
          declare
@@ -162,6 +162,11 @@ begin
          begin
             Ada.Text_IO.Put_Line("CreateWindowExA failed!");
             Ada.Text_IO.Put_Line("Error code: " & long'Image(ErrCode));
+            -- Print additional information to debug
+            Ada.Text_IO.Put_Line("ClassName: " & Interfaces.C.Strings.Value(ClassName_C));
+            Ada.Text_IO.Put_Line("WindowName: " & Interfaces.C.Strings.Value(WindowName_C));
+            Ada.Text_IO.Put_Line("hInstance: " & Interfaces.C.unsigned_long'Image(WndClassa.hInstance));
+            Ada.Text_IO.Put_Line("Error code: " & long'Image(GetLastError));
          end;
          return;
       end if;
