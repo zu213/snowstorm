@@ -1,3 +1,5 @@
 .vscode/*
 *.lock
-Rust/snow/target/*
+Rust/snow/target/*/
+.vs
+/C++/snow
