@@ -17,7 +17,6 @@ int random;
 void setupNewSnow(){
     random = rand() % WIDTH;
     pixels[random] = RGB(255, 255, 255);
-
 }
 
 void animateSnow(){

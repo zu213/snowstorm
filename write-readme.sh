@@ -5,6 +5,8 @@ directories=(
     "./assembly"
     "./C"
     "./D"
+    "./C++"
+    "./ada"
 )
 
 srcs=(
@@ -12,6 +14,9 @@ srcs=(
     "./assembly/snow.asm"
     "./C/snow.c"
     "./D/snow/source/app.d"
+    "./C++/snow.cpp"
+    "./ada/snow.adb"
+
 )
 
 # Clear file
@@ -58,4 +63,3 @@ echo "#### Assembly:" >> README.md
 echo "" >> README.md
 echo "<img src="gifs/assembly.gif" alt="snow" width="600"/>" >> README.md
 echo "" >> README.md
-

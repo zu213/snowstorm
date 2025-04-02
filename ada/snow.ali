@@ -1,0 +1,266 @@
+V "GNAT Lib v14"
+M P W=b
+P SS ZX
+
+RN
+RV NO_ACCESS_SUBPROGRAMS
+RV NO_EXCEPTIONS
+RV NO_IO
+RV NO_IMPLICIT_DYNAMIC_CODE
+RV NO_STANDARD_STORAGE_POOLS
+RV NO_DEFAULT_INITIALIZATION
+RV NO_DYNAMIC_SIZED_OBJECTS
+RV NO_IMPLEMENTATION_PRAGMAS
+RV NO_OBSOLESCENT_FEATURES
+
+U snow%b		snow.adb		d3d4cff6 NE OO SU
+W ada%s			ada.ads			ada.ali
+W ada.numerics%s	a-numeri.ads		a-numeri.ali
+W ada.numerics.discrete_random%s
+Z ada.strings.text_buffers%s  a-sttebu.adb	a-sttebu.ali
+W ada.text_io%s		a-textio.adb		a-textio.ali
+W interfaces%s		interfac.ads		interfac.ali
+W interfaces.c%s	i-c.adb			i-c.ali
+W interfaces.c.strings%s  i-cstrin.adb		i-cstrin.ali
+W system%s		system.ads		system.ali
+Z system.random_numbers%s  s-rannum.adb		s-rannum.ali
+
+D ada.ads		20241103211802 76789da1 ada%s
+D a-except.ads		20241103211802 e7970cd9 ada.exceptions%s
+D a-ioexce.ads		20241103211802 40018c65 ada.io_exceptions%s
+D a-numeri.ads		20241103211802 84bea7a3 ada.numerics%s
+D a-nudira.ads		20241103211802 5984dff3 ada.numerics.discrete_random%s
+D a-nudira.adb		20241103211802 0bfd6ec4 ada.numerics.discrete_random%b
+D a-stream.ads		20241103211802 119b8fb3 ada.streams%s
+D a-string.ads		20241103211802 90ac6797 ada.strings%s
+D a-sttebu.ads		20241103211802 f1ad67a2 ada.strings.text_buffers%s
+D a-stuten.ads		20241103211802 c6ced0ae ada.strings.utf_encoding%s
+D a-tags.ads		20241103211802 9eaa38c6 ada.tags%s
+D a-textio.ads		20241103211802 34ef47de ada.text_io%s
+D a-unccon.ads		20241103211802 0e9b276f ada.unchecked_conversion%s
+D interfac.ads		20241103211802 9111f9c1 interfaces%s
+D i-c.ads		20241103211802 aac316ce interfaces.c%s
+D i-cstrin.ads		20241103211802 5409c1a4 interfaces.c.strings%s
+D i-cstrea.ads		20241103211802 ffd01b9d interfaces.c_streams%s
+D snow.adb		20250402202408 a48d3037 snow%b
+D system.ads		20241103211802 e4f8b086 system%s
+D s-crtl.ads		20241103211802 beb39b9e system.crtl%s
+D s-exctab.ads		20241103211802 91bef6ef system.exception_table%s
+D s-ficobl.ads		20241103211802 dc5161d4 system.file_control_block%s
+D s-imageu.ads		20241103211802 b0b50650 system.image_u%s
+D s-imguns.ads		20241103211802 c4e23690 system.img_uns%s
+D s-parame.ads		20241103211802 3597fc11 system.parameters%s
+D s-putima.ads		20241103211802 17291fe4 system.put_images%s
+D s-rannum.ads		20241103211802 95815eca system.random_numbers%s
+D s-rannum.adb		20241103211802 0f2dcb9a system.random_numbers%b
+D s-ransee.ads		20241103211802 01a57b33 system.random_seed%s
+D s-secsta.ads		20241103211802 578279f5 system.secondary_stack%s
+D s-soflin.ads		20241103211802 df77073e system.soft_links%s
+D s-stache.ads		20241103211802 0b81c1fe system.stack_checking%s
+D s-stalib.ads		20241103211802 1c9580f6 system.standard_library%s
+D s-stoele.ads		20241103211802 ccded4e8 system.storage_elements%s
+D s-traent.ads		20241103211802 c81cbf8c system.traceback_entries%s
+D s-unstyp.ads		20241103211802 fa2a7f59 system.unsigned_types%s
+D s-valspe.ads		20241103211802 b0fcd073 system.val_spec%s
+D s-valuns.ads		20241103211802 f7ddb71d system.val_uns%s
+D s-valueu.ads		20241103211802 a38d32a6 system.value_u%s
+D s-vauspe.ads		20241103211802 89269ba5 system.value_u_spec%s
+D s-vs_uns.ads		20241103211802 e7f47a27 system.vs_uns%s
+D s-wchcon.ads		20241103211802 d9032363 system.wch_con%s
+G a e
+G c Z b b [snow standard 7 11 none]
+X 1 ada.ads
+16K9*Ada 20e8 18|1r6 5r6 121r29
+X 4 a-numeri.ads
+16K13*Numerics 35e17 18|5r10 121r33
+X 5 a-nudira.ads
+44k22*Discrete_Random 81e33 18|5w19 121r42
+50R9 Generator<27|65R9> 18|122r20[121]
+52V13 Random{integer} 18|126s26[121]
+61U14 Reset<27|103p14> 18|125s14[121]
+X 6 a-nudira.adb
+53V16 Random[27|86]{integer} 28|402b13[18|121]
+65V16 Random[27|86]{integer} 28|402b13[18|121]
+X 12 a-textio.ads
+58K13*Text_IO 785e16 18|1w10
+X 14 interfac.ads
+38K9*Interfaces 233e15 18|2r6 3r6 8r8 28r23 37r24 42r24 50r46 51r46 52r46
+. 53r46 56r42 64r52 64r79 91r36 110r64 110r99 116r51 116r76 155r44 157r14
+. 165r22 166r32 167r22 168r16 171r40 221r43 235r44 235r65 237r52 237r73 238r52
+. 238r97 244r43 244r82
+81M9*Unsigned_32
+84M9*Unsigned_64
+X 15 i-c.ads
+30K20*C 598e17 18|2w17 3r17 8r19 28r34 37r35 42r35 50r57 51r57 52r57 53r57
+. 56r53 64r63 64r90 91r47 110r75 110r110 116r62 116r87 155r55 157r25 165r33
+. 166r43 167r33 168r27 171r51 221r54 235r55 235r76 237r63 237r84 238r63 238r108
+. 244r54 244r93
+59I9*int<integer> 18|54r52 61r96 79r13 100r76 106r80 107r60 107r95 110r51
+. 113r33 116r64 168r29 170r16 171r53 220r43 235r57 235r78 237r65 237r86 238r65
+. 238r110 244r56 244r95
+61I9*long<integer> 18|11r32 12r32 13r32 14r32 14r45 19r17 20r17 21r17 22r17
+. 23r17 24r17 29r24 30r51 31r51 32r51 33r51 33r64 35r24 36r24 47r70 58r37
+. 67r33 67r50 70r35 75r20 76r20 77r20 88r43 94r26 131r32 132r32 133r32 134r32
+. 134r45 148r11 164r19
+70M9*unsigned_long 18|28r36 37r37 50r59 53r59 56r55 64r92 78r20 91r49 107r73
+. 110r77 110r112 116r89 166r45 221r56
+106E9*char<character> 18|64r65
+X 16 i-cstrin.ads
+44K22*Strings 154e25 18|3w19 42r37 51r59 52r59 155r57 157r27 165r35 167r35
+60P9*chars_ptr 18|42r45 51r67 52r67 155r65 165r43 167r43
+78V13*New_String{60P9} 18|157s35
+X 18 snow.adb
+7U11*Snow 7b11 251l5 251t9
+11V13 WndProc{15|61I9} 11>22 12>22 13>22 14>22 15r26 131b13 145l8 145t15
+. 179r34
+11i22 hwnd{15|61I9} 131b22
+12i22 msg{15|61I9} 132b22 136r12
+13i22 wParam{15|61I9} 133b22
+14i22 lParam{15|61I9} 134b22
+18R9 MSG 25e14 74r27 82r47 85r47 219r51
+19i7 hwnd{15|61I9}
+20i7 message{15|61I9}
+21i7 wParam{15|61I9}
+22i7 lParam{15|61I9}
+23i7 time{15|61I9}
+24i7 pt{15|61I9}
+27R9 WNDCLASSEX 44e14 47r51 163r27 175r27
+28m7 cbSize{15|70M9} 175m17
+29i7 style{15|61I9} 178m17
+30p7 lpfnWndProc(15|61I9) 179m17
+30i41 hwnd{15|61I9}
+31i41 msg{15|61I9}
+32i41 wParam{15|61I9}
+33i41 lParam{15|61I9}
+35i7 cbClsExtra{15|61I9} 180m17
+36i7 cbWndExtra{15|61I9} 181m17
+37m7 hInstance{15|70M9} 182m17 187m17 197r84
+38m7 hIcon{19|67M9} 183m17
+39m7 hCursor{19|67M9} 184m17
+40m7 hbrBackground{19|67M9} 185m17
+41m7 lpszMenuName{19|67M9} 177m17
+42p7 lpszClassName{16|60P9} 176m17
+43m7 hIconSm{19|67M9} 186m17
+47V13*RegisterClassExA{15|61I9} 47^31 48b28 189s17
+47p31 lpWndClass(27R9)
+50V13*CreateWindowExA{15|61I9} 50>30 51>30 52>30 53>30 54>30 54>33 54>36
+. 54>43 55>30 55>42 56>30 57>30 59b28 192s15
+50m30 ExStyle{15|70M9}
+51p30 ClassName{16|60P9}
+52p30 WindowName{16|60P9}
+53m30 Style{15|70M9}
+54i30 X{15|59I9}
+54i33 Y{15|59I9}
+54i36 Width{15|59I9}
+54i43 Height{15|59I9}
+55m30 hWndParent{19|67M9}
+55m42 hMenu{19|67M9}
+56m30 hInstance{15|70M9}
+57m30 lpParam{19|67M9}
+61V13*FillRect{15|59I9} 61>22 61>44 61>67 62b27 210s18
+61m22 hdc{19|67M9}
+61m44 lprc{19|67M9}
+61m67 hbr{19|67M9}
+64V13*GetModuleHandleA{15|70M9} 64^30 65b28 182s34 187s30
+64p30 lpModuleName(15|106E9)
+67U14*ShowWindow 67>26 67>39 68b28 200s7
+67i26 hwnd{15|61I9}
+67i39 nCmdShow{15|61I9}
+70U14*UpdateWindow 70>28 71b28 201s7 247s13
+70i28 hwnd{15|61I9}
+73V13*PeekMessageA{15|59I9} 74^4 75>4 76>4 77>4 78>4 80b28 224s27
+74p4 lpMsg(18R9)
+75i4 hwnd{15|61I9}
+76i4 wMsgFilterMin{15|61I9}
+77i4 wMsgFilterMax{15|61I9}
+78m4 wRemoveMsg{15|70M9}
+82U14*TranslateMessage 82^32 83b28 226s16
+82p32 lpMsg(18R9)
+85U14*DispatchMessageA 85^32 86b28 227s16
+85p32 lpMsg(18R9)
+88U14*PostQuitMessage 88>31 89b28 140s13
+88i31 nExitCode{15|61I9}
+91U14*Sleep 91>21 92b28 230s13
+91m21 Milliseconds{15|70M9}
+94V13*GetDC{19|67M9} 94>19 95b27 204s14
+94i19 hwnd{15|61I9}
+97V13*CreateCompatibleDC{19|67M9} 97>32 98b27 206s16
+97m32 hdc{19|67M9}
+100V13*CreateCompatibleBitmap{19|67M9} 100>36 100>58 100>66 101b27 205s18
+100m36 hdc{19|67M9}
+100i58 nWidth{15|59I9}
+100i66 nHeight{15|59I9}
+103V13*SelectObject{19|67M9} 103>26 103>31 104b27 213s20
+103m26 hdc{19|67M9}
+103m31 hgdiobj{19|67M9}
+106V13*BitBlt{15|59I9} 106>20 106>46 106>54 106>62 106>70 107>20 107>45 107>52
+. 107>65 108b27 214s18 246s26
+106m20 hdcDest{19|67M9}
+106i46 nXDest{15|59I9}
+106i54 nYDest{15|59I9}
+106i62 nWidth{15|59I9}
+106i70 nHeight{15|59I9}
+107m20 hdcSrc{19|67M9}
+107i45 nXSrc{15|59I9}
+107i52 nYSrc{15|59I9}
+107m65 dwRop{15|70M9}
+110V13*SetPixel{15|70M9} 110>22 110>44 110>47 110>56 111b27 237s36 238s36
+. 244s27
+110m22 hdc{19|67M9}
+110i44 X{15|59I9}
+110i47 Y{15|59I9}
+110m56 Color{15|70M9}
+113V13*GetStockObject{19|67M9} 113>29 114b28 185s34 209s21
+113i29 i{15|59I9}
+116V13*GetPixel{15|70M9} 116>22 116>44 116>47 117b27 235s28
+116m22 hdc{19|67M9}
+116i44 X{15|59I9}
+116i47 Y{15|59I9}
+119V13 Random_Integer{integer} 119b13 119>28 128l8 128t22 238s77 244s60
+119i28 top{integer} 120r46
+120I15 My_Range{integer} 121r58 123r18
+121K15 Random[5|44] 122r13 125r7 126r19
+122r7 Gen{5|50R9[121]} 125r20 126r33
+123i7 Rand_Num{120I15} 126m7 127r14
+148i4 HWnd{15|61I9} 192m7 200r18 201r20 204r20 224r53 247r26
+151a4 ClassName{string} 165r68
+152a4 WindowName{string} 167r68
+155V13 To_C_String{16|60P9} 155b13 155>25 158l8 158t19 165s56 167s56 193s32
+155a25 S{string} 157r46
+163r7 WndClassa{27R9} 175m7 176m7 177m7 178m7 179m7 180m7 181m7 182m7 183m7
+. 184m7 185m7 186m7 187m7 189m34 189r34 197r74
+164i7 Result{15|61I9} 189m7
+165p7 ClassName_C{16|60P9} 176r34
+166m7 hInstance1{15|70M9}
+166m19 hInstance2{15|70M9}
+167p7 WindowName_C{16|60P9} 194r32
+168i7 Exists{15|59I9}
+169m7 memDC{19|67M9} 206m7 210r27 213r33 214r46 235r37 237r45 238r45 244r36
+. 246r54
+169m14 hBitmap{19|67M9} 205m7 213r40
+169m23 oldBitmap{19|67M9} 213m7
+169m34 blackBrush{19|67M9} 209m7 210r48
+169m46 hdc{19|67M9} 204m7 205r41 206r35 214r25 246r33
+170i7 return2{15|59I9} 210m7 214m7
+171a7 rect(15|59I9) 210m34 210r34
+219r13 msga{18R9} 224m40 224r40 226m33 226r33 227m33 227r33
+220i13 X{15|59I9}
+220i16 Y{15|59I9}
+220i19 hasMessage{15|59I9} 224m13 225r16
+220i31 returnVal{15|59I9} 246m13
+221m13 returnVal3{15|70M9} 237m22 238m22 244m13
+221m25 Color{15|70M9} 235m19 236r22
+233i17 Y{integer} 235r82 237r90 238r114
+234i20 X{integer} 235r61 237r69 238r69
+X 19 system.ads
+37K9*System 18|4w6 38r24 39r24 40r24 41r24 43r24 55r53 57r39 61r28 61r51
+. 61r73 94r39 97r38 97r61 100r42 100r88 103r41 103r64 106r30 107r29 110r28
+. 113r45 116r28 169r52 177r34 183r34 184r34 186r33 197r32 197r53 197r95 19|194e11
+67M9*Address 18|38r31 39r31 40r31 41r31 43r31 55r60 57r46 61r35 61r58 61r80
+. 94r46 97r45 97r68 100r49 100r95 103r48 103r71 106r37 107r36 110r35 113r52
+. 116r35 169r59
+69m4*Null_Address{67M9} 18|177r41 183r41 184r41 186r40 197r39 197r60 197r102
+X 27 s-rannum.ads
+77V13*Random{14|81M9} 28|224i21
+78V13*Random{14|84M9} 28|224i21
+
